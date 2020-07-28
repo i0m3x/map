@@ -1,6 +1,8 @@
 import { describe, Try } from 'riteway'
 import exercises from '../workshop'
 
+
+
 describe('tripleAll', async assert => {
   assert({
     given: 'empty array',
@@ -16,6 +18,9 @@ describe('tripleAll', async assert => {
     expected: [3,6,9,12,15]
   })
 })
+
+
+
 
 describe('upperCaseNames', async assert => {
   assert({
@@ -117,7 +122,7 @@ describe('mergeObjects', async assert => {
     expected: {}
   })
 
-  const objects = [{a:1}, {b:2}, {c:3, d:4}]
+  const objects = [{a:1}, {b:2}, {c:3, d:4}] //{a:1, b:2, c:3, d:4}
 
   assert({
     given: 'array of objects',

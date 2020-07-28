@@ -26,7 +26,7 @@ const doubleAll2 = xs => xs.map(x => x * 2)
 
 // Try making a function that triples all elements in an array.
 // replace undefined with a function.
-const tripleAll = xs => undefined
+const tripleAll = numbers => numbers.map(number => number*3)
 
 
 // map is not just for simple arithmetic on numbers. It also comes in handy when
@@ -46,12 +46,14 @@ const lowerCaseNames = lowerCaseAll(names) // ['ben bitdiddle', 'eva lu ator', '
 // even though lowerCaseNames equals ['ben bitdiddle', 'eva lu ator', 'alyssa p. hacker']
 
 // Perhaps most commonly, map is used with objects.
+// const upperCaseNames = upperCaseAll(people)
 //
 // The following function (pluckNames) pulls out the name field from the objects.
 
 const pluckNames = people => people.map(person => person.name)
 
 const people = [ { name: 'Bob' }, { name: 'Sarah' }, { name: 'Daniel' }]
+
 
 const peopleNames = pluckNames(people) // [ 'Bob', 'Sarah', 'Daniel' ]
 
@@ -104,8 +106,8 @@ const upperCaseNamesForLoopVersion = people => {
 // Exercise: upperCaseNames
 // Rewrite the above function by using map instead of a for loop.
 // replace undefined with your function definition
-const upperCaseNames = undefined
-
+// const upperCaseNames = undefined
+const upperCaseNames = people => people.map(person => person.name.toUpperCase())
 // Notice that using map is much shorter, easier to write, easier to 
 // read (once you get used to it) and easier to debug.
 
@@ -119,6 +121,7 @@ const upperCaseNames = undefined
 const wrapInDiv = xs => xs.map(x => `<div>${x}</div>`)
 
 // What would this output?  wrapInDiv(upperCaseNames(people))
+//<div>BOB</div>
 
 
 // Exercise: userLinks
@@ -129,12 +132,18 @@ const wrapInDiv = xs => xs.map(x => `<div>${x}</div>`)
 // For the href of the anchor tag, set it to '/users/<username>' where <username>
 // is the actual username of the user.
 
+// we have an array
+// so what is each index of the list 0,1,2
+// made of objects
+
 const users = [
   { email: 'bob@bob.com', username: 'bobsled99', age: 30 },
   { email: 'joe@woohoo.com', username: 'joemamma', age: 22 },
   { email: 'sierra@coldmail.com', username: 'sierramyst', age: 24 },
 ]
 
+// for x in xs so user in users
+const userLinks = users => users.map(user=> `<a href="/users/${user.username}">${user.username}</a>`)
 // userLinks(users) should give us:
 
 // [
@@ -145,7 +154,7 @@ const users = [
 
 
 // replace undefined with your function definition
-const userLinks = undefined
+// const userLinks = undefined
 
 
 // That concludes the map section!
@@ -202,6 +211,7 @@ const applicants = [
 
 // toBeInterviewed should contain only the Bob and Sierra objects.
 // Joe has been filtered out.
+                          // xs             x             x.advancedJSCourse == true
 const toBeInterviewed = applicants.filter(applicant => applicant.advancedJSCourse)
 
 // Exercise: getApplicantEmails
@@ -211,7 +221,16 @@ const toBeInterviewed = applicants.filter(applicant => applicant.advancedJSCours
 // Use map and filter. No for-loops.
 // Hint: You can chain a .map off of the result of a .filter.
 
-const getApplicantEmails = undefined
+// const getApplicantEmails = applicants.filter(applicant => applicant.email)
+
+//FOCUS ON WHAT IS THE ARRAY AND THE THING WE ITERATE THROUGH
+
+//ARRAY applicants.filter(applicant => applicant.advancedJSCourse && applicant.age >= 18)
+//PREDICATE  applicant.advancedJSCourse && applicant.age >= 18
+
+const getApplicantEmails = applicants => applicants.filter(applicant => applicant.advancedJSCourse && applicant.age >= 18).map(applicant => applicant.email)
+
+//NO CALLBACK NEEDED, ALSO WE FILTER THEN ATTACH MAP
 
 // Reduce
 //
@@ -283,8 +302,27 @@ const numberOfAdvancedGrads2 =
 // Note: there is a built-in function called Object.assign that pretty much does this.
 // So don't use Object.assign to implement this. Use reduce.
 // You can use the spread operator (...) if you want, which may make things easier.
+// const numberOfAdvancedGrads =  applicants.reduce((accum, applicant) => applicant.advancedJSCourse ? accum + 1 : accum)
 
-const mergeObjects = undefined
+// const sum2 = xs => xs.reduce((total, x) => total + x)
+//we need inital value
+//if we can feed it in
+// const mergeObjects = xs => xs.reduce((acc, x) => (...acc, ...x), {})
+const mergeObjects = xs => xs.reduce((current, next) => {
+  return {...current, ...next}
+}, {}) //line 300 it's like an empty param we are passing each time
+//do it in a return statement b/c then you are explicitly returning an empty
+//obj at the end of that also
+
+//https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce
+  
+
+//putting both of these into single array
+
+//zip
+
+// 
+
 
 // Congratulations on finishing!
 //
